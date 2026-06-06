@@ -1,0 +1,43 @@
+const { contextBridge, ipcRenderer } = require('electron');
+
+contextBridge.exposeInMainWorld('authAPI', {
+    register: (payload) => ipcRenderer.invoke('auth:register', payload),
+    login: (payload) => ipcRenderer.invoke('auth:login', payload),
+    resetPassword: (payload) => ipcRenderer.invoke('auth:reset-password', payload),
+    createLicense: (payload) => ipcRenderer.invoke('license:create', payload),
+    listLicenses: () => ipcRenderer.invoke('license:list'),
+    getActiveLicense: (userId) => ipcRenderer.invoke('license:get-active', userId),
+    resetLicenseHwid: (licenseId) => ipcRenderer.invoke('license:reset-hwid', licenseId),
+    deleteLicense: (licenseId) => ipcRenderer.invoke('license:delete', licenseId),
+    updateLicense: (payload) => ipcRenderer.invoke('license:update', payload),
+    assignLicense: (payload) => ipcRenderer.invoke('license:assign', payload),
+    extendLicense: (payload) => ipcRenderer.invoke('license:extend', payload),
+    setLicenseStatus: (payload) => ipcRenderer.invoke('license:set-status', payload),
+    getDashboardStats: () => ipcRenderer.invoke('dashboard:get-stats'),
+    listUsers: (search) => ipcRenderer.invoke('users:list', search),
+    setUserStatus: (payload) => ipcRenderer.invoke('users:set-status', payload),
+    deleteUser: (userId) => ipcRenderer.invoke('users:delete', userId),
+    extendUserLicense: (payload) => ipcRenderer.invoke('users:extend-license', payload),
+    updateUser: (payload) => ipcRenderer.invoke('users:update', payload),
+    listActivationLogs: () => ipcRenderer.invoke('logs:list'),
+    listExpiringLicenses: () => ipcRenderer.invoke('licenses:expiring'),
+    getUpdateStatus: () => ipcRenderer.invoke('updates:get-status'),
+    checkForUpdates: () => ipcRenderer.invoke('updates:check'),
+    downloadUpdate: () => ipcRenderer.invoke('updates:download'),
+    installUpdate: () => ipcRenderer.invoke('updates:install'),
+    getSettings: () => ipcRenderer.invoke('settings:get'),
+    saveSettings: (payload) => ipcRenderer.invoke('settings:save', payload),
+    testSmtp: () => ipcRenderer.invoke('settings:test-smtp'),
+    sendTestMail: (payload) => ipcRenderer.invoke('mail:test-send', payload),
+    sendExpiringLicenseMails: () => ipcRenderer.invoke('mail:send-expiring'),
+    sendLicenseInfoMail: (payload) => ipcRenderer.invoke('mail:send-license-info', payload),
+    createBackup: (payload) => ipcRenderer.invoke('backup:create', payload),
+    listBackups: () => ipcRenderer.invoke('backup:list'),
+    restoreBackup: (fileName) => ipcRenderer.invoke('backup:restore', fileName),
+    runAutoBackup: () => ipcRenderer.invoke('backup:auto-run'),
+    selectBackupDir: () => ipcRenderer.invoke('backup:select-dir'),
+    listOnlineUsers: () => ipcRenderer.invoke('online:list'),
+    onUpdateStatus: (callback) => {
+        ipcRenderer.on('update:status', (_event, status) => callback(status));
+    }
+});

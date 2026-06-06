@@ -1,0 +1,16 @@
+GENERIC UPDATE SERVER ÖRNEĞİ
+
+Update URL örneği:
+https://senindomain.com/teknik-servis-updates/
+
+Bu klasörde bulunması gerekenler:
+- latest.yml
+- Teknik Servis-0.8.0-win-x64.exe
+- Teknik Servis-0.8.0-win-x64.exe.blockmap
+
+Yeni sürüm yayınlama:
+1. package.json version değerini artır.
+2. npm run security:manifest
+3. npm run dist
+4. dist klasöründeki latest.yml ve exe dosyasını update sunucusuna yükle.
+5. Admin panel Ayarlar > Update URL alanına update klasörü URL'sini gir.

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetici Girişi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="background-shape"></div>
+        <div class="secondary-shape"></div>
+
+        <div class="credentials-panel signin">
+            <h2 class="slide-element">Yönetici Girişi</h2>
+            <form id="loginForm" action="#" autocomplete="on">
+                <div class="field-wrapper slide-element">
+                    <input id="loginEmail" type="email" required autocomplete="email">
+                    <label for="loginEmail">E-posta</label>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div class="field-wrapper slide-element">
+                    <input id="loginPassword" type="password" required autocomplete="current-password">
+                    <label for="loginPassword">Şifre</label>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div class="login-options slide-element">
+                    <label class="remember-me" for="rememberMe">
+                        <input id="rememberMe" type="checkbox">
+                        <span>Beni hatırla</span>
+                    </label>
+                    <a href="#" class="forgot-password-trigger">Şifremi unuttum</a>
+                </div>
+
+                <p id="loginMessage" class="form-message slide-element" aria-live="polite"></p>
+
+                <div class="field-wrapper slide-element">
+                    <button id="loginSubmitButton" class="submit-button" type="submit"><span class="button-text">Giriş Yap</span></button>
+                </div>
+
+                <div class="switch-link slide-element">
+                    <p>Hesabınız yok mu? <br> <a href="#" class="register-trigger">Kayıt Ol</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="welcome-section signin">
+            <h2 class="slide-element">TEKRAR HOŞ GELDİNİZ!</h2>
+            <p class="slide-element">Teknik servis yönetim panelinize güvenli giriş yapın.</p>
+        </div>
+
+        <div class="credentials-panel signup">
+            <h2 class="slide-element">Kayıt Ol</h2>
+            <form id="registerForm" action="#" autocomplete="on">
+                <div class="field-wrapper slide-element">
+                    <input id="registerName" type="text" required autocomplete="name">
+                    <label for="registerName">Ad Soyad</label>
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div class="field-wrapper slide-element">
+                    <input id="registerEmail" type="email" required autocomplete="email">
+                    <label for="registerEmail">E-posta</label>
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <div class="field-wrapper slide-element">
+                    <input id="registerPassword" type="password" required autocomplete="new-password">
+                    <label for="registerPassword">Şifre</label>
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <p id="registerMessage" class="form-message slide-element" aria-live="polite"></p>
+
+                <div class="field-wrapper slide-element">
+                    <button class="submit-button" type="submit">Kayıt Oluştur</button>
+                </div>
+
+                <div class="switch-link slide-element">
+                    <p>Zaten hesabınız var mı? <br> <a href="#" class="login-trigger">Giriş Yap</a></p>
+                </div>
+            </form>
+        </div>
+
+        <div class="welcome-section signup">
+            <h2 class="slide-element">HOŞ GELDİNİZ!</h2>
+            <p class="slide-element">Hesabınızı oluşturup giriş yapabilirsiniz.</p>
+        </div>
+
+        <div class="password-reset-modal" id="passwordResetModal" aria-hidden="true">
+            <div class="password-reset-card">
+                <button class="modal-close" type="button" aria-label="Kapat">×</button>
+                <h3>Şifre Değiştir</h3>
+                <p>Kayıtlı e-posta adresinizi ve yeni şifrenizi girin.</p>
+                <form id="resetPasswordForm" action="#">
+                    <div class="modal-field">
+                        <input id="resetEmail" type="email" placeholder="E-posta" required>
+                    </div>
+                    <div class="modal-field">
+                        <input id="resetPassword" type="password" placeholder="Yeni şifre" required>
+                    </div>
+                    <p id="resetMessage" class="form-message" aria-live="polite"></p>
+                    <button class="submit-button" type="submit">Şifreyi Güncelle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main class="admin-dashboard" id="adminDashboard" aria-hidden="true">
+        <aside class="admin-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-mark"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <div>
+                    <strong>Servix</strong>
+                    <span>Yönetici Paneli</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Yönetici menüsü">
+                <a class="active" href="#dashboardTop" data-nav-target="dashboardTop"><i class="fa-solid fa-chart-line"></i><span>Genel Bakış</span></a>
+                <a href="#usersPanel" data-nav-target="usersPanel"><i class="fa-solid fa-users-gear"></i><span>Kullanıcılar</span></a>
+                <a href="#licensePanel" data-nav-target="licensePanel"><i class="fa-solid fa-key"></i><span>Lisanslar</span></a>
+                <a href="#logsPanel" data-nav-target="logsPanel"><i class="fa-solid fa-clock-rotate-left"></i><span>Aktivasyon Logları</span></a>
+                <a href="#expiringPanel" data-nav-target="expiringPanel"><i class="fa-solid fa-hourglass-half"></i><span>Bitecek Lisanslar</span></a>
+                <a href="#onlinePanel" data-nav-target="onlinePanel"><i class="fa-solid fa-signal"></i><span>Online</span></a>
+                <a href="#backupPanel" data-nav-target="backupPanel"><i class="fa-solid fa-database"></i><span>Yedekleme</span></a>
+                <a href="#updatesPanel" data-nav-target="updatesPanel"><i class="fa-solid fa-rotate"></i><span>Güncellemeler</span></a>
+                <a href="#settingsPanel" data-nav-target="settingsPanel"><i class="fa-solid fa-gear"></i><span>Ayarlar</span></a>
+            </nav>
+
+        </aside>
+
+        <section class="dashboard-content" id="dashboardTop">
+            <header class="dashboard-topbar">
+                <div>
+                    <p class="eyebrow">Kademe 7.2</p>
+                    <h1>Yönetici Dashboard</h1>
+                    <span id="dashboardWelcome">Giriş doğrulandı.</span>
+                </div>
+                <div class="dashboard-topbar-actions">
+                    <button class="modern-theme-toggle" id="themeToggleButton" type="button" aria-label="Tema değiştir">
+                        <span class="theme-toggle-track">
+                            <span class="theme-toggle-thumb"><i class="fa-solid fa-moon"></i></span>
+                        </span>
+                    </button>
+                    <button class="topbar-logout animated-logout-button" id="logoutButton" type="button" aria-label="Çıkış Yap">
+                <svg class="doorway" viewBox="0 0 100 100" aria-hidden="true">
+                    <path d="M93.4 86.3H58.6c-1.9 0-3.4-1.5-3.4-3.4V17.1c0-1.9 1.5-3.4 3.4-3.4h34.8c1.9 0 3.4 1.5 3.4 3.4v65.8c0 1.9-1.5 3.4-3.4 3.4z" />
+                    <path class="bang" d="M40.5 43.7L26.6 31.4l-2.5 6.7zM41.9 50.4l-19.5-4-1.4 6.3zM40 57.4l-17.7 3.9 3.9 5.7z" />
+                </svg>
+                <svg class="figure" viewBox="0 0 100 100" aria-hidden="true">
+                    <circle cx="52.1" cy="32.4" r="6.4" />
+                    <path d="M50.7 62.8c-1.2 2.5-3.6 5-7.2 4-3.2-.9-4.9-3.5-4-7.8.7-3.4 3.1-13.8 4.1-15.8 1.7-3.4 1.6-4.6 7-3.7 4.3.7 4.6 2.5 4.3 5.4-.4 3.7-2.8 15.1-4.2 17.9z" />
+                    <g class="arm1">
+                        <path d="M55.5 56.5l-6-9.5c-1-1.5-.6-3.5.9-4.4 1.5-1 3.7-1.1 4.6.4l6.1 10c1 1.5.3 3.5-1.1 4.4-1.5.9-3.5.5-4.5-.9z" />
+                        <path class="wrist1" d="M69.4 59.9L58.1 58c-1.7-.3-2.9-1.9-2.6-3.7.3-1.7 1.9-2.9 3.7-2.6l11.4 1.9c1.7.3 2.9 1.9 2.6 3.7-.4 1.7-2 2.9-3.8 2.6z" />
+                    </g>
+                    <g class="arm2">
+                        <path d="M34.2 43.6L45 40.3c1.7-.6 3.5.3 4 2 .6 1.7-.3 4-2 4.5l-10.8 2.8c-1.7.6-3.5-.3-4-2-.6-1.6.3-3.4 2-4z" />
+                        <path class="wrist2" d="M27.1 56.2L32 45.7c.7-1.6 2.6-2.3 4.2-1.6 1.6.7 2.3 2.6 1.6 4.2L33 58.8c-.7 1.6-2.6 2.3-4.2 1.6-1.7-.7-2.4-2.6-1.7-4.2z" />
+                    </g>
+                    <g class="leg1">
+                        <path d="M52.1 73.2s-7-5.7-7.9-6.5c-.9-.9-1.2-3.5-.1-4.9 1.1-1.4 3.8-1.9 5.2-.9l7.9 7c1.4 1.1 1.7 3.5.7 4.9-1.1 1.4-4.4 1.5-5.8.4z" />
+                        <path class="calf1" d="M52.6 84.4l-1-12.8c-.1-1.9 1.5-3.6 3.5-3.7 2-.1 3.7 1.4 3.8 3.4l1 12.8c.1 1.9-1.5 3.6-3.5 3.7-2 0-3.7-1.5-3.8-3.4z" />
+                    </g>
+                    <g class="leg2">
+                        <path d="M37.8 72.7s1.3-10.2 1.6-11.4 2.4-2.8 4.1-2.6c1.7.2 3.6 2.3 3.4 4l-1.8 11.1c-.2 1.7-1.7 3.3-3.4 3.1-1.8-.2-4.1-2.4-3.9-4.2z" />
+                        <path class="calf2" d="M29.5 82.3l9.6-10.9c1.3-1.4 3.6-1.5 5.1-.1 1.5 1.4.4 4.9-.9 6.3l-8.5 9.6c-1.3 1.4-3.6 1.5-5.1.1-1.4-1.3-1.5-3.5-.2-5z" />
+                    </g>
+                </svg>
+                <svg class="door" viewBox="0 0 100 100" aria-hidden="true">
+                    <path d="M93.4 86.3H58.6c-1.9 0-3.4-1.5-3.4-3.4V17.1c0-1.9 1.5-3.4 3.4-3.4h34.8c1.9 0 3.4 1.5 3.4 3.4v65.8c0 1.9-1.5 3.4-3.4 3.4z" />
+                    <circle cx="66" cy="50" r="3.7" />
+                </svg>
+                <span class="button-text">Çıkış Yap</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="dashboard-page active" id="overviewPanel" data-page="dashboardTop">
+            <div class="stat-grid">
+                <article class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <span>Toplam Hesap</span>
+                    <strong id="statUsers">0</strong>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-key"></i></div>
+                    <span>Aktif Lisans</span>
+                    <strong id="statActiveLicenses">0</strong>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <span>Yakında Bitecek</span>
+                    <strong id="statExpiring">0</strong>
+                </article>
+                <article class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-computer"></i></div>
+                    <span>Bağlı Cihaz</span>
+                    <strong id="statDevices">0</strong>
+                </article>
+            </div>
+            </div>
+
+            <section class="dashboard-panel dashboard-page" id="licensePanel" data-page="licensePanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Lisans Özeti</h2>
+                        <p>Sistemdeki lisans ve cihaz durumlarının yönetici görünümü.</p>
+                    </div>
+                    <button class="panel-action" id="openLicenseModal" type="button">Yeni Lisans</button>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table">
+                        <thead>
+                            <tr>
+                                <th>Lisans Kodu</th>
+                                <th>Tip</th>
+                                <th>Atanan Hesap</th>
+                                <th>Durum</th>
+                                <th>Bitiş</th>
+                                <th>Cihaz</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="licenseTableBody">
+                            <tr>
+                                <td colspan="7" class="table-empty">Lisans kayıtları yükleniyor...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel users-panel dashboard-page" id="usersPanel" data-page="usersPanel">
+                <div class="panel-header users-panel-header">
+                    <div>
+                        <h2>Kullanıcı Yönetimi</h2>
+                        <p>Kayıtlı kullanıcıları yönetme, banlama, lisans uzatma ve cihaz durumlarını görme alanı.</p>
+                    </div>
+                    <div class="user-search-wrap">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input id="userSearchInput" type="search" placeholder="Kullanıcı ara...">
+                    </div>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table users-table">
+                        <thead>
+                            <tr>
+                                <th>Kullanıcı</th>
+                                <th>Durum</th>
+                                <th>Lisans</th>
+                                <th>Bitiş</th>
+                                <th>Cihaz</th>
+                                <th>Kayıt / Son Giriş</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr>
+                                <td colspan="7" class="table-empty">Kullanıcı kayıtları yükleniyor...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel users-panel dashboard-page" id="logsPanel" data-page="logsPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Aktivasyon Logları</h2>
+                        <p>Giriş denemeleri, lisans kontrolü, HWID uyuşmazlığı ve yönetim işlemleri kayıtları.</p>
+                    </div>
+                    <button class="panel-action" id="refreshLogsButton" type="button">Logları Yenile</button>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table logs-table">
+                        <thead>
+                            <tr>
+                                <th>Tarih</th>
+                                <th>Olay</th>
+                                <th>Hesap</th>
+                                <th>Durum</th>
+                                <th>Lisans</th>
+                                <th>Cihaz</th>
+                                <th>Mesaj</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logsTableBody">
+                            <tr>
+                                <td colspan="7" class="table-empty">Aktivasyon kayıtları yükleniyor...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <section class="dashboard-panel dashboard-page" id="expiringPanel" data-page="expiringPanel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Süresi Bitecek Lisanslar</h2>
+                        <p>7 gün içinde bitecek, bugün bitecek ve süresi dolmuş lisansları takip edin.</p>
+                    </div>
+                    <div class="panel-inline-actions"><button class="panel-action secondary" id="sendExpiringMailButton" type="button">Bitiş Maili Gönder</button><button class="gradient-button" id="refreshExpiringButton" type="button">Listeyi Yenile</button></div>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table expiring-table">
+                        <thead>
+                            <tr>
+                                <th>Lisans Kodu</th>
+                                <th>Hesap</th>
+                                <th>Durum</th>
+                                <th>Bitiş</th>
+                                <th>Cihaz</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expiringTableBody">
+                            <tr><td colspan="6" class="table-empty">Süresi yaklaşan lisans kaydı yok.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel dashboard-page" id="onlinePanel" data-page="onlinePanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Online Kullanıcılar</h2>
+                        <p>Son 15 dakika içinde aktif görünen hesap ve cihaz kayıtları.</p>
+                    </div>
+                    <button class="panel-action" id="refreshOnlineButton" type="button">Online Listeyi Yenile</button>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table online-table">
+                        <thead>
+                            <tr>
+                                <th>Hesap</th>
+                                <th>Rol</th>
+                                <th>Durum</th>
+                                <th>Cihaz</th>
+                                <th>Son Görülme</th>
+                            </tr>
+                        </thead>
+                        <tbody id="onlineTableBody">
+                            <tr><td colspan="5" class="table-empty">Online kayıtları yükleniyor...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel dashboard-page" id="backupPanel" data-page="backupPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Backup & Restore</h2>
+                        <p>SQLite veritabanı için manuel yedek alma, yedek listeleme ve geri yükleme.</p>
+                    </div>
+                    <button class="panel-action" id="createBackupButton" type="button">Yedek Al</button>
+                </div>
+                <div class="backup-summary-card">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <div>
+                        <strong>Yedekleme alanı</strong>
+                        <span id="backupDirText">Yedek klasörü yükleniyor...</span>
+                    </div>
+                    <button class="panel-action secondary" id="refreshBackupsButton" type="button">Listeyi Yenile</button>
+                </div>
+                <div class="license-table-wrap">
+                    <table class="license-table backup-table">
+                        <thead>
+                            <tr>
+                                <th>Dosya</th>
+                                <th>Boyut</th>
+                                <th>Tarih</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody id="backupTableBody">
+                            <tr><td colspan="4" class="table-empty">Yedek kayıtları yükleniyor...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="dashboard-panel dashboard-page" id="updatesPanel" data-page="updatesPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Güncellemeler</h2>
+                        <p>Program sürümü ve güncelleme kontrolleri için yönetici alanı.</p>
+                    </div>
+                </div>
+                <div class="update-card">
+                    <div class="update-status-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                    <div class="update-status-content">
+                        <span class="update-label">Mevcut Sürüm</span>
+                        <strong id="currentVersionText">Yükleniyor...</strong>
+                        <p id="updateStatusText">Güncelleme durumu hazırlanıyor.</p>
+                        <div class="update-progress" id="updateProgressWrap" hidden>
+                            <span id="updateProgressBar"></span>
+                        </div>
+                    </div>
+                    <div class="update-actions">
+                        <button class="panel-action" id="checkUpdateButton" type="button">Güncelleme Kontrol Et</button>
+                        <button class="panel-action secondary" id="downloadUpdateButton" type="button" hidden>İndir</button>
+                        <button class="panel-action success" id="installUpdateButton" type="button" hidden>Yeniden Başlat ve Kur</button>
+                    </div>
+                </div>
+                <div class="update-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Gerçek dağıtımda <strong>package.json &gt; build.publish.url</strong> alanına update sunucu adresi girilecek. Dist çıktısındaki <strong>latest.yml</strong> ve kurulum dosyası aynı adrese yüklenecek.</span>
+                </div>
+            </section>
+
+            <section class="dashboard-panel dashboard-page" id="settingsPanel" data-page="settingsPanel">
+                <div class="panel-header">
+                    <div>
+                        <h2>Ayarlar</h2>
+                        <p>Update, varsayılan lisans, SMTP ve otomatik yedek tercihleri.</p>
+                    </div>
+                </div>
+                <form class="settings-form" id="settingsForm" action="#">
+                    <div class="settings-grid">
+                        <div class="modal-field">
+                            <label for="settingAppName">Uygulama Adı</label>
+                            <input id="settingAppName" type="text" placeholder="Servix">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingUpdateUrl">Update Sunucu Adresi</label>
+                            <input id="settingUpdateUrl" type="url" placeholder="https://.../updates">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingDefaultLicenseType">Varsayılan Lisans</label>
+                            <select id="settingDefaultLicenseType">
+                                <option value="trial_7">7 Günlük Deneme</option>
+                                <option value="monthly_30">30 Günlük Lisans</option>
+                                <option value="yearly_365">365 Günlük Lisans</option>
+                                <option value="lifetime">Süresiz Lisans</option>
+                            </select>
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingAutoBackup">Otomatik Backup</label>
+                            <select id="settingAutoBackup">
+                                <option value="true">Açık</option>
+                                <option value="false">Kapalı</option>
+                            </select>
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingBackupRetention">Yedek Saklama Adedi</label>
+                            <input id="settingBackupRetention" type="number" min="1" max="100" placeholder="10">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingBackupFrequency">Otomatik Yedek Sıklığı</label>
+                            <select id="settingBackupFrequency">
+                                <option value="hourly">Saatlik</option>
+                                <option value="daily">Günlük</option>
+                                <option value="weekly">Haftalık</option>
+                            </select>
+                        </div>
+                        <div class="modal-field backup-dir-field">
+                            <label for="settingBackupDir">Yedek Klasörü</label>
+                            <div class="backup-dir-input-row">
+                                <input id="settingBackupDir" type="text" placeholder="Varsayılan klasör kullanılır">
+                                <button class="panel-action secondary" id="selectBackupDirButton" type="button">Seç</button>
+                            </div>
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpHost">SMTP Host</label>
+                            <input id="settingSmtpHost" type="text" placeholder="smtp.example.com">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpPort">SMTP Port</label>
+                            <input id="settingSmtpPort" type="number" placeholder="587">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpSecure">SMTP Güvenlik</label>
+                            <select id="settingSmtpSecure">
+                                <option value="false">STARTTLS / Normal</option>
+                                <option value="true">SSL / TLS</option>
+                            </select>
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpUser">SMTP Kullanıcı</label>
+                            <input id="settingSmtpUser" type="text" placeholder="mail@example.com">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpPassword">SMTP Şifre</label>
+                            <input id="settingSmtpPassword" type="password" placeholder="Boş bırakılırsa mevcut şifre korunur" autocomplete="new-password">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingSmtpFrom">Gönderici Mail</label>
+                            <input id="settingSmtpFrom" type="email" placeholder="noreply@example.com">
+                        </div>
+                        <div class="modal-field">
+                            <label for="settingTestMailTo">Test Mail Alıcısı</label>
+                            <input id="settingTestMailTo" type="email" placeholder="Test maili için alıcı">
+                        </div>
+                    </div>
+                    <p id="settingsMessage" class="form-message" aria-live="polite"></p>
+                    <div class="settings-actions">
+                        <button class="submit-button settings-save-button" type="submit">Ayarları Kaydet</button>
+                        <button class="submit-button settings-test-button" id="testSmtpButton" type="button">SMTP Bağlantı Testi</button>
+                        <button class="submit-button settings-test-button" id="sendTestMailButton" type="button">Test Mail Gönder</button>
+                    </div>
+                </form>
+            </section>
+        </section>
+    </main>
+
+
+    <div class="license-modal" id="licenseModal" aria-hidden="true">
+        <div class="license-modal-card license-create-card">
+            <button class="modal-close license-modal-close" type="button" aria-label="Kapat">×</button>
+            <div class="license-create-head">
+                <span class="license-create-icon"><i class="fa-solid fa-key"></i></span>
+                <div>
+                    <h3>Yeni Lisans Oluştur</h3>
+                    <p>Tip seçin, isterseniz kayıtlı hesaba atayın ve not ekleyin.</p>
+                </div>
+            </div>
+            <form id="createLicenseForm" action="#">
+                <div class="license-code-preview">
+                    <span>Otomatik kod</span>
+                    <strong id="licenseCodePreview">TKS-TRY-0000-0000</strong>
+                </div>
+                <div class="license-type-grid" role="radiogroup" aria-label="Lisans tipi">
+                    <label class="license-type-card active">
+                        <input type="radio" name="licenseTypeChoice" value="trial_7" checked>
+                        <span>7 Günlük</span>
+                        <small>Deneme</small>
+                    </label>
+                    <label class="license-type-card">
+                        <input type="radio" name="licenseTypeChoice" value="monthly_30">
+                        <span>30 Günlük</span>
+                        <small>Aylık</small>
+                    </label>
+                    <label class="license-type-card">
+                        <input type="radio" name="licenseTypeChoice" value="yearly_365">
+                        <span>365 Günlük</span>
+                        <small>Yıllık</small>
+                    </label>
+                    <label class="license-type-card">
+                        <input type="radio" name="licenseTypeChoice" value="lifetime">
+                        <span>Süresiz</span>
+                        <small>Lifetime</small>
+                    </label>
+                </div>
+                <input id="licenseType" type="hidden" value="trial_7">
+                <div class="modal-field labeled-field">
+                    <label for="licenseAssignedEmail">Atanacak hesap e-postası</label>
+                    <input id="licenseAssignedEmail" type="email" placeholder="Opsiyonel - kayıtlı değilse atanmamış oluşur">
+                </div>
+                <div class="modal-field labeled-field modal-textarea-field">
+                    <label for="licenseNote">Lisans notu</label>
+                    <textarea id="licenseNote" rows="3" maxlength="300" placeholder="Opsiyonel yönetici notu"></textarea>
+                </div>
+                <div class="license-create-summary" id="licenseCreateSummary">7 Günlük Deneme lisansı oluşturulacak.</div>
+                <p id="licenseMessage" class="form-message" aria-live="polite"></p>
+                <button class="submit-button" type="submit">Lisans Oluştur</button>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="license-modal" id="userEditModal" aria-hidden="true">
+        <div class="license-modal-card user-edit-modal-card">
+            <button class="modal-close user-edit-modal-close" type="button" aria-label="Kapat">×</button>
+            <h3>Kullanıcı Düzenle</h3>
+            <p>Kullanıcı bilgisi, abonelik, şifre, HWID ve yönetici notunu güncelleyin.</p>
+            <form id="userEditForm" action="#">
+                <input id="editUserId" type="hidden">
+                <div class="user-edit-grid">
+                    <div class="modal-field">
+                        <label for="editUserName">Ad Soyad</label>
+                        <input id="editUserName" type="text" placeholder="Ad Soyad" required>
+                    </div>
+                    <div class="modal-field">
+                        <label for="editUserEmail">E-posta</label>
+                        <input id="editUserEmail" type="email" placeholder="E-posta" required>
+                    </div>
+                    <div class="modal-field">
+                        <label for="editUserPassword">Yeni Şifre</label>
+                        <input id="editUserPassword" type="password" placeholder="Boş bırakırsanız değişmez">
+                    </div>
+                    <div class="modal-field">
+                        <label for="editUserStatus">Kullanıcı Durumu</label>
+                        <select id="editUserStatus" required>
+                            <option value="active">Aktif</option>
+                            <option value="banned">Banlı</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="editLicenseType">Lisans Tipi</label>
+                        <select id="editLicenseType" required>
+                            <option value="trial_7">7 Günlük Deneme</option>
+                            <option value="monthly_30">30 Günlük Lisans</option>
+                            <option value="yearly_365">365 Günlük Lisans</option>
+                            <option value="lifetime">Süresiz Lisans</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="editLicenseStatus">Abonelik Durumu</label>
+                        <select id="editLicenseStatus" required>
+                            <option value="active">Aktif</option>
+                            <option value="passive">Pasif</option>
+                            <option value="expired">Süresi Dolmuş</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="editExpiresAt">Bitiş Tarihi</label>
+                        <input id="editExpiresAt" type="date">
+                    </div>
+                    <div class="modal-field">
+                        <label for="editManualHwid">HWID Manuel</label>
+                        <input id="editManualHwid" type="text" placeholder="Boş bırakırsanız değişmez">
+                    </div>
+                </div>
+                <div class="modal-field user-edit-note-field">
+                    <label for="editUserNote">Yönetici Notu</label>
+                    <textarea id="editUserNote" rows="4" placeholder="Bu kullanıcı için not ekleyin"></textarea>
+                </div>
+                <p id="userEditMessage" class="form-message" aria-live="polite"></p>
+                <button class="submit-button" type="submit">Kullanıcıyı Kaydet</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="style.js"></script>
+</body>
+
+</html>

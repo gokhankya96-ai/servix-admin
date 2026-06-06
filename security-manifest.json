@@ -1,0 +1,13 @@
+{
+  "generatedAt": "2026-06-05T21:19:06.564Z",
+  "algorithm": "sha256",
+  "files": {
+    "index.html": "dc33e80a5ca146605d7a21dc93793c93863c348390d1d8e83d16f1110ae3a2c7",
+    "style.css": "0d25390c5287bb7e0c288d88edc6f164925ae144ac357a4640aa4a754f9aaa54",
+    "style.js": "167e4e483e6377a2dbc5bc6256fa5fd60aed95240c63f0a28d5d881de9d62b41",
+    "main.js": "68759fc2c0e95782557d5cc1f0744a8395b3458dd75fd5762bb2216d8fea0052",
+    "preload.js": "6a3434b092bf6de2b7271251c549d2c011ae4b6127bbdf6cb54aa0c510cc3d71",
+    "database.js": "5acb08dbbbda7f380bc209f896fe53ec142b04a7828d6f4101285ac07612dd5a",
+    "package.json": "cdde3970c5dfa8ae270c2dca685e7823b8feac1a1bd119e36d40eb7b7fedeca3"
+  }
+}

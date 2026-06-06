@@ -1,0 +1,99 @@
+{
+  "name": "servix-admin",
+  "version": "0.8.0",
+  "description": "Servix teknik servis yönetim ve lisans admin paneli",
+  "main": "main.js",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "dist": "electron-builder --win nsis --publish never",
+    "pack": "electron-builder --dir",
+    "dist:publish": "electron-builder --win nsis --publish always",
+    "security:manifest": "node scripts/generate-security-manifest.js",
+    "postinstall": "electron-rebuild -f -w better-sqlite3 || echo electron-rebuild atlandı",
+    "preflight": "node scripts/preflight-check.js",
+    "doctor": "node scripts/clean-install-help.js",
+    "build:check": "npm run preflight && npm run dist",
+    "release:check": "node scripts/release-check.js",
+    "release:stable": "node scripts/release-check.js stable && electron-builder --win nsis --publish always",
+    "release:beta": "node scripts/release-check.js beta && electron-builder --win nsis --publish always --config.extraMetadata.channel=beta",
+    "dist:stable": "electron-builder --win nsis --publish never",
+    "dist:beta": "electron-builder --win nsis --publish never --config.extraMetadata.channel=beta"
+  },
+  "dependencies": {
+    "@electron/remote": "^2.1.2",
+    "better-sqlite3": "^11.9.1",
+    "electron": "^34.0.0",
+    "electron-updater": "^6.3.9",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "electron-builder": "^25.1.8",
+    "electron-rebuild": "^3.2.9"
+  },
+  "build": {
+    "appId": "com.servix.admin",
+    "productName": "Servix",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "style.css",
+      "style.js",
+      "main.js",
+      "preload.js",
+      "database.js",
+      "package.json",
+      "security-manifest.json",
+      "resources/**",
+      "scripts/**"
+    ],
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "publisherName": "Servix",
+      "verifyUpdateCodeSignature": false,
+      "icon": "resources/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Servix",
+      "deleteAppDataOnUninstall": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "installerIcon": "resources/icon.ico",
+      "uninstallerIcon": "resources/icon.ico",
+      "installerSidebar": "resources/installer-sidebar.bmp",
+      "installerHeader": "resources/installer-header.bmp"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "CHANGE_ME_GITHUB_OWNER",
+        "repo": "servix-releases",
+        "releaseType": "release"
+      }
+    ],
+    "asar": true,
+    "compression": "maximum",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "extraMetadata": {
+      "channel": "stable"
+    }
+  }
+}
